@@ -13,47 +13,32 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    const input = prompt('Hello, choose Rock, Paper, or Scissors!');
-    const choice = input.toLowerCase();
-    if (choice === 'rock') {
-        return 'Rock';
-    }
-    else if (choice === 'paper') {
-        return 'Paper';
-    }
-    else if (choice === 'scissors') {
-        return 'Scissors';
-    }
-    else {
-        alert('Invalid choice!');
-        return getHumanChoice();
-    }
-}
-
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
     
-    for (i = 1; i <= 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
+    let rockBtn = document.querySelector("#rockBtn");
+    let paperBtn = document.querySelector("#paperBtn");
+    let scissorsBtn = document.querySelector("#scissorsBtn");
 
-    console.log('Final Score | Computer: ' + computerScore + ' | You: ' + humanScore);
+    rockBtn.addEventListener("click", () => playRound('Rock'));
+    paperBtn.addEventListener("click", () => playRound('Paper'));
+    scissorsBtn.addEventListener("click", () => playRound('Scissors'));
+
+    // console.log('Final Score | Computer: ' + computerScore + ' | You: ' + humanScore);
     
-    if (humanScore > computerScore) {
-        console.log("You win! Computer loses!");
-    }
-    else if (computerScore > humanScore) {
-        console.log("Computer wins! You lose!")
-    }
-    else {
-        console.log("It's a tied game!")
-    }
+    // if (humanScore > computerScore) {
+    //     console.log("You win! Computer loses!");
+    // }
+    // else if (computerScore > humanScore) {
+    //     console.log("Computer wins! You lose!")
+    // }
+    // else {
+    //     console.log("It's a tied game!")
+    // }
 
-    function playRound(humanChoice, computerChoice) {
+    function playRound(humanChoice) {
+        const computerChoice = getComputerChoice();
         console.log('You chose' + ' ' + humanChoice + ', Computer chose ' + computerChoice);
         
         if (humanChoice === computerChoice) {
@@ -84,8 +69,9 @@ function playGame() {
             computerScore++;
         }
 
-        console.log('Scoreboard | Computer: ' + computerScore + ' | You: ' + humanScore);
-    }    
+        const result = document.querySelector("#results");
+        result.textContent = 'Scoreboard | Computer: ' + computerScore + ' | You: ' + humanScore
+    }
 }
 
 playGame();

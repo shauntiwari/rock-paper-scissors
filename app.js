@@ -16,7 +16,7 @@ function getComputerChoice() {
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-    
+
     let rockBtn = document.querySelector("#rockBtn");
     let paperBtn = document.querySelector("#paperBtn");
     let scissorsBtn = document.querySelector("#scissorsBtn");
@@ -24,18 +24,6 @@ function playGame() {
     rockBtn.addEventListener("click", () => playRound('Rock'));
     paperBtn.addEventListener("click", () => playRound('Paper'));
     scissorsBtn.addEventListener("click", () => playRound('Scissors'));
-
-    // console.log('Final Score | Computer: ' + computerScore + ' | You: ' + humanScore);
-    
-    // if (humanScore > computerScore) {
-    //     console.log("You win! Computer loses!");
-    // }
-    // else if (computerScore > humanScore) {
-    //     console.log("Computer wins! You lose!")
-    // }
-    // else {
-    //     console.log("It's a tied game!")
-    // }
 
     function playRound(humanChoice) {
         const computerChoice = getComputerChoice();
@@ -69,8 +57,17 @@ function playGame() {
             computerScore++;
         }
 
-        const result = document.querySelector("#results");
+        const result = document.querySelector("#result");
+        result.style.marginTop = '15px';
         result.textContent = 'Scoreboard | Computer: ' + computerScore + ' | You: ' + humanScore
+        
+        let winner = document.createElement("div");
+        winner.style.marginTop = '15px';
+        winner.style.fontSize = 'Large';
+
+        if (humanScore === 5) {winner.textContent = 'You win!';}
+        if (computerScore === 5) {winner.textContent = 'Computer wins!';}
+        result.appendChild(winner);
     }
 }
 
